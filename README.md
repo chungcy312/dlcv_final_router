@@ -1,8 +1,18 @@
+# DLCV Final – Router Classifier
 
-Run router.py for demo
+place router.pth @ checkpoint/router to inference
 
+Run 
+```bash
+python router.py 
+```
+for demo
 
-
+Run
+```bash
+python router.py path/to/json
+```
+for inference json file (with router.classifier)
 
 
 batch = 256:
