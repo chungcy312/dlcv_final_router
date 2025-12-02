@@ -1,4 +1,4 @@
-from transformers import RobertaTokenizer, RobertaModel
+from transformers import RobertaTokenizer, RobertaModel, RobertaConfig
 from transformers import BertTokenizer, BertModel
 from torch.utils.data import Dataset, DataLoader
 
@@ -68,7 +68,8 @@ class ROUTER(nn.Module):
         # self.bert = BertModel.from_pretrained("bert-base-uncased")
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
-        self.encoder = RobertaModel.from_pretrained("roberta-base").to(self.device)
+        config = RobertaConfig.from_pretrained("roberta-base")
+        self.encoder = RobertaModel(config).to(self.device)
         self.classifier = Classifier(768).to(self.device)
 
     def forward(self, text, train_encoder = False):
