@@ -13,7 +13,7 @@ Run
 ```bash
 python router.py path/to/json
 ```
-for inference json file (with router.classifier)
+for inference json file (using router.classifier)
 
 
 # Performance
