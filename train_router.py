@@ -13,7 +13,7 @@ batch_size = 256
 
 
 parser.add_argument("--checkpoint_dir", required = False, default = "checkpoint/router")
-parser.add_argument("--train_json", required = False, default = "DLCV_Final1/train.json")
+parser.add_argument("--train_json", required = False, default = "../../DLCV_Final1/train.json")
 parser.add_argument("--val_json", default = "../../DLCV_Final1/val.json", required = False)
 parser.add_argument("--epoch", default = 3, required = False, type = int)
 
@@ -40,18 +40,18 @@ def collate_fn(batch):
 
 router = ROUTER()
 
-router.load_state_dict(torch.load("checkpoint/router/router_ep2.pth"))
+# router.load_state_dict(torch.load("checkpoint/router/router_ep2.pth"))
 
 
-# train_dataset = dataset(router.encoder, router.tokenizer, args.train_json)
+train_dataset = dataset(router.encoder, router.tokenizer, args.train_json)
 val_dataset = dataset(router.encoder, router.tokenizer, args.val_json)
 
-# train_dataloader = DataLoader(train_dataset, batch_size, True, collate_fn = collate_fn)
+train_dataloader = DataLoader(train_dataset, batch_size, True, collate_fn = collate_fn)
 val_dataloader = DataLoader(val_dataset, batch_size, False, collate_fn = collate_fn)
 
 train_cfg = train_config()
 train_cfg.outdir = args.checkpoint_dir
 train_cfg.epoch = args.epoch
 
-# router.train(train_dataloader, val_dataloader, train_cfg, True)
+router.train(train_dataloader, val_dataloader, train_cfg, True)
 router.test(val_dataloader)
