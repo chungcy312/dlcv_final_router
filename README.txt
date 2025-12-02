@@ -1,4 +1,9 @@
-# dlcv_final_router
+
+Run router.py for demo
+
+
+
+
 
 batch = 256:
 val_correct: 630

@@ -165,6 +165,8 @@ class ROUTER(nn.Module):
         val_total = 0
         import time
         start_time = time.time()
+        criterion = nn.CrossEntropyLoss()
+        total_loss = 0;
         for batch in tqdm(dataloader):
             input_ids = batch["input_ids"].to(self.device)
             attention_mask = batch["attention_mask"].to(self.device)
@@ -176,11 +178,13 @@ class ROUTER(nn.Module):
                 )
                 cls = output.last_hidden_state[:, 0, :]
                 logits = self.classifier(cls)
+                total_loss += criterion(logits, labels).item()
             preds = torch.argmax(logits, dim=1)
             val_correct += (preds == labels).sum().item()
             val_total += labels.size(0)
         val_acc = val_correct / val_total
         end_time = time.time()
+        print(f"val loss: {total_loss / len(dataloader)}")
         print(f"val_correct: {val_correct}")
         print(f"val_total: {val_total}")
         print(f"Inference {val_total} questions in {(end_time - start_time)//60} min {(end_time - start_time)%60} sec")
@@ -194,7 +198,7 @@ if __name__ == "__main__":
     gt = "left_right"
 
     router = ROUTER()
-    router.load_state_dict(torch.load("checkpoint/router/router_ep2.pth", weights_only= True))
+    router.load_state_dict(torch.load("checkpoint/router/router.pth", weights_only= True))
 
     id = router.classify(text)
 
