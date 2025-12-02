@@ -1,6 +1,6 @@
-## DLCV Final – Router Classifier
+# DLCV Final – Router Classifier
 
-# Inference
+## Inference
 place router.pth @ checkpoint/router to inference
 
 Run 
@@ -16,7 +16,7 @@ python router.py path/to/json
 for inference json file (using router.classifier)
 
 
-# Performance
+## Performance
 batch = 256:<br>
 val_correct: 630<br>
 val_total: 630<br>
