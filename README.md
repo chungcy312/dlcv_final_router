@@ -1,5 +1,6 @@
-# DLCV Final – Router Classifier
+## DLCV Final – Router Classifier
 
+# Inference
 place router.pth @ checkpoint/router to inference
 
 Run 
@@ -15,13 +16,14 @@ python router.py path/to/json
 for inference json file (with router.classifier)
 
 
-batch = 256:
-val_correct: 630
-val_total: 630
-Inference 630 questions in 0.0 min 2.594860553741455 sec
-Average: 0.004118826275780087 sec each
-
-Using router.Classify
-accuracy: 1.0
-Inference 630 questions in 0.0 min 8.902583360671997 sec
-Average: 0.01413108469947936 sec each
+# Performance
+batch = 256:<br>
+val_correct: 630<br>
+val_total: 630<br>
+Inference 630 questions in 0.0 min 2.594860553741455 sec<br>
+Average: 0.004118826275780087 sec each<br>
+<br>
+Using router.Classify<br>
+accuracy: 1.0<br>
+Inference 630 questions in 0.0 min 8.902583360671997 sec<br>
+Average: 0.01413108469947936 sec each<br>
